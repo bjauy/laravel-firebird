@@ -30,6 +30,17 @@ class FirebirdGrammar extends Grammar {
   {
     return "SELECT RDB\$RELATION_NAME FROM RDB\$RELATIONS WHERE RDB\$RELATION_NAME = ?";
   }
+  
+  /**
+   * Compile the query to determine if a column exists.
+   *
+   * @param  string $table
+   * @return string
+   */
+  public function compileColumnExists($table)
+  {
+    return "SELECT RDB\$FIELD_NAME AS COLUMN_NAME FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = '$table'";
+  }
 
   /**
    * Compile a create table command.
